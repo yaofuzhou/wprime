@@ -1,0 +1,167 @@
+#*****************************************************************
+# This file is useful only if "model" in param_card.dat is set   *
+# to nonzero.                                                    *
+#                                                                *
+# WARNING! WARNING! WARNING! WARNING! WARNING! WARNING! WARNING! *
+# Please read the instructions and edit this file carefully,     *
+# since the calculations will involve ALL of the numbers in this *
+# file.                                                          *
+# WARNING! WARNING! WARNING! WARNING! WARNING! WARNING! WARNING! *
+#                                                                *
+# (A) The first column is reserved for '#' only.                 *
+#                                                                *
+# (B) Do not use TAB for spacing, use SPACE only.                *
+#                                                                *
+# (C) This file contains all the parameters in the most general  *
+# Lorentz invariant Lagrangian describing the coupling of a      *
+# W-prime to fermions. While the Lagrangian can be written as    *
+#                                                                *
+# \mathcal{L}=                                                   *
+#                                                                *
+# \frac{g}{\sqrt{2}}\bar{f_{i}}\gamma_{\mu}                      *
+# (C_{f_{i}f_{j}}^{R}P_{R}+C_{f_{i}f_{j}}^{L}P_{L})W'f_{j}+      *
+# \mathrm{H.c.}=                                             (1) *
+#                                                                *
+# \frac{1}{\sqrt{2}}\bar{f_{i}}\gamma_{\mu}                      *
+# (g_{R}e^{i\omega}\cos\zeta V_{f_{i}f_{j}}^{R}P_{R}+            *
+#  g_{L}\sin\zeta V_{f_{i}f_{j}}^{L}P_{L})W'f_{j}+               *
+# \mathrm{H.c.}=                                             (2) *
+#                                                                *
+# \frac{g}{\sqrt{2}}\bar{f_{i}}\gamma_{\mu}                      *
+# (S_{R}e^{i\omega}V_{f_{i}f_{j}}^{R}P_{R}+                      *
+#  S_{L}V_{f_{i}f_{j}}^{L}P_{L})W'f_{j}+                         *
+# \mathrm{H.c.},                                             (3) *
+#                                                                *
+# form (3) is used in this file, where the left-right mixing     *
+# factors \cos\zeta and \sin\zeta in form (2) are absorbed into  *
+# S_{R} and S_{L} respectively.                                  *
+#                                                                *
+# (D) The real multipliers for the Generalized CKM matrices can  *
+# be used to switch on/off the sector, or handle the differece   *
+# between coupling constants of left-handed quarks and           *
+# left-handed leptons.                                           *
+#                                                                *
+# (E) Enable log, run                                            *
+#                                                                *
+# $ make checkmodel                                              *
+# $ ./checkmodel                                                 *
+#                                                                *
+# to make sure that the parameters are set correctly.            *
+#                                                                *       
+#*****************************************************************
+# g = W-prime coupling constant                      variable name
+# (Default to SM SU(2)_{L} coupling constant)
+  6.53078575991675d-1            # g                         cf(1)
+#
+#
+# S_{R} = multiplier of g for right-handed particles
+# (Default to 1d0 to enable right-handed couplings)
+  1d0                            # S_{R}                     cf(2)
+#*****************************************************************
+# Note that \cos\zeta in form (2) is absorbed into S_{R}. Also   *
+# note that S_{R} will be multiplied by BOTH the multiplier for  *
+# right-handed quarks, and "grscale" in param_card.dat.          *
+#*****************************************************************
+#
+#
+# S_{L} = multiplier of g for left-handed particles
+# (Default to 1d0 for SM)
+  1d0                            # S_{L}                     cf(3)
+#*****************************************************************
+# Note that \sin\zeta in form (2) is absorbed into S_{L}. Also   *
+# note that S_{L} for left-handed quarks/leptons will be         *
+# multiplied by BOTH the multiplier for left-handed              *
+# quarks/leptons, and "glscale" in 'param_card.dat'.             *
+#*****************************************************************
+#
+#
+# omega = CP-violating phase (in Radians)
+  0d0                            # omega                      f(4)
+#*****************************************************************
+# Leave omega zero if e^{i\omega} is absorbed into your CKM      *
+# matrix.                                                        *
+#*****************************************************************
+#
+#
+# Generalized CKM matrix for right-handed quarks
+# (Default to SM CKM matrix for left-handed quarks)
+#   real part      imagnary part
+  9.74190000d-01        0d0      # V_{ud}^{R}        rqr(1),rqi(1)
+  2.25700000d-01        0d0      # V_{us}^{R}        rqr(2),rqi(2)
+  3.59000000d-03        0d0      # V_{ub}^{R}        rqr(3),rqi(3)
+  2.25600000d-01        0d0      # V_{cd}^{R}        rqr(4),rqi(4)
+  9.73340000d-01        0d0      # V_{cs}^{R}        rqr(5),rqi(5)
+  4.15000000d-02        0d0      # V_{cb}^{R}        rqr(6),rqi(6)
+  8.74000000d-03        0d0      # V_{td}^{R}        rqr(7),rqi(7)
+  4.07000000d-02        0d0      # V_{ts}^{R}        rqr(8),rqi(8)
+  9.99133000d-01        0d0      # V_{tb}^{R}        rqr(9),rqi(9)
+  1d0                            # multiplier                cf(5)
+#*****************************************************************
+# Note that S_{R} will be scaled by this multiplier for          *
+# right-handed quarks.                                           *
+#*****************************************************************
+#
+#
+#*****************************************************************
+# There is no right-handed neutrino in our scope.                *
+#*****************************************************************
+#
+#
+# Generalized CKM matrix for left-handed quarks
+# (Default to SM CKM matrix for left-handed quarks)
+#   real part      imagnary part
+  9.74190000d-01        0d0      # V_{ud}^{L}        lqr(1),lqi(1)
+  2.25700000d-01        0d0      # V_{us}^{L}        lqr(2),lqi(2)
+  3.59000000d-03        0d0      # V_{ub}^{L}        lqr(3),lqi(3)
+  2.25600000d-01        0d0      # V_{cd}^{L}        lqr(4),lqi(4)
+  9.73340000d-01        0d0      # V_{cs}^{L}        lqr(5),lqi(5)
+  4.15000000d-02        0d0      # V_{cb}^{L}        lqr(6),lqi(6)
+  8.74000000d-03        0d0      # V_{td}^{L}        lqr(7),lqi(7)
+  4.07000000d-02        0d0      # V_{ts}^{L}        lqr(8),lqi(8)
+  9.99133000d-01        0d0      # V_{tb}^{L}        lqr(9),lqi(9)
+  1d0                            # multiplier                cf(6)
+#*****************************************************************
+# Note that S_{L} will be scaled by this multiplier for          *
+# left-handed quarks.                                            *
+#*****************************************************************
+#
+#
+# Generalized CKM matrix for left-handed leptons
+# (Default to diagonal unitary matrix)
+#   real part      imagnary part
+       1d0              0d0      # V_{eve}^{L}       llr(1),lli(1)
+       0d0              0d0      # V_{evm}^{L}       llr(2),lli(2)
+       0d0              0d0      # V_{evt}^{L}       llr(3),lli(3)
+       0d0              0d0      # V_{mve}^{L}       llr(4),lli(4)
+       1d0              0d0      # V_{mvm}^{L}       llr(5),lli(5)
+       0d0              0d0      # V_{mvt}^{L}       llr(6),lli(6)
+       0d0              0d0      # V_{tve}^{L}       llr(7),lli(7)
+       0d0              0d0      # V_{tvm}^{L}       llr(8),lli(8)
+       1d0              0d0      # V_{tvt}^{L}       llr(9),lli(9)
+  1d0                            # multiplier                cf(7)
+#*****************************************************************
+# Note that S_{L} will be scaled by this multiplier for          *
+# left-handed leptons.                                           *
+#*****************************************************************
+#
+#
+# Log settings                                     sets(1)-sets(6)
+  .true. # log enabled
+  .true. # log coupling constants and CKM matrices for right- and
+# left-handed quarks and leptons
+  .true. # log W-prime width; W-prime mass is set to WPMASS in
+# 'param_card.dat'
+  .true. # log branching ratios
+  .true. # log R_{u} and R_{t} for quick view. See the footnote
+# of README for the definations of R_{u} and R_{t}.
+  .true. # log R_{u}, R_{t} with higher precision (which takes
+# ~170 more lines), and g_{SM}/g_{effctive} if R_{u}=0
+#*****************************************************************
+# Log will not be saved as files automatically, but will be      *
+# printed to the terminal, which can be directed to files.       *
+#*****************************************************************
+#
+#
+
+
+EOF

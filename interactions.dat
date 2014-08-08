@@ -1,0 +1,171 @@
+#     interactions_sm_v1.0.dat
+#
+#       File which contains allowed interactions. Must be named
+#       interactions.dat and reside in the current directory for MadGraph
+#       to see it.
+#
+#       3-particle vertices are entered as follows:
+#
+#       particle1 particle2  particle3 coupling_name model (QCD,QFD,QED,BRS)
+#
+#       Note: The ordering of particles is very important.
+#       For FFV interactions, must use particles, not anti_particles.
+#
+
+#
+# QCD interactions
+#
+
+d d g GG QCD
+u u g GG QCD
+s s g GG QCD
+c c g GG QCD
+b b g GG QCD
+t t g GG QCD
+
+g g g G  QCD
+
+g g g g G G QCD QCD
+
+#
+# QED interactions
+#
+
+d d a GAD QED
+u u a GAU QED
+s s a GAD QED
+c c a GAU QED
+b b a GAD QED
+t t a GAU QED
+
+e-  e-  a GAL QED
+mu- mu- a GAL QED
+ta- ta- a GAL QED
+
+#
+# QFD Interactions
+#
+
+# FFV (qqZ)
+d d z GZD QED
+u u z GZU QED
+s s z GZD QED
+c c z GZU QED
+b b z GZD QED
+t t z GZU QED
+
+# FFV (llZ)
+e-  e-  z GZL QED
+mu- mu- z GZL QED
+ta- ta- z GZL QED
+ve  ve  z GZN QED
+vm  vm  z GZN QED
+vt  vt  z GZN QED
+
+# FFV (qq'W) - diagonal CKM
+d u w- GWFUD QED
+s c w- GWFCS QED
+b t w- GWFTB QED
+u d w+ GWFUD QED
+c s w+ GWFCS QED
+t b w+ GWFTB QED
+
+# FFV (qq'W) - off-diagonal
+d c w- GWFCD QED
+d t w- GWFTD QED
+s u w- GWFUS QED
+s t w- GWFTS QED
+b u w- GWFUB QED
+b c w- GWFCB QED
+c d w+ GWFCD QED
+t d w+ GWFTD QED
+u s w+ GWFUS QED
+t s w+ GWFTS QED
+u b w+ GWFUB QED
+c b w+ GWFCB QED
+
+# FFV (ll'W)
+ve  e-  w+ GWF QED
+vm  mu- w+ GWF QED
+vt  ta- w+ GWF QED
+e-  ve  w- GWF QED
+mu- vm  w- GWF QED
+ta- vt  w- GWF QED
+
+# FFS (Yukawa)
+ta- ta- h GHTAU QED
+b   b   h GHBOT QED
+t   t   h GHTOP QED
+
+
+#
+# Boson 3-,4-pt
+#
+
+#   VVV
+w- w+ a  GWWA  QED
+w- w+ z  GWWZ  QED
+
+#   VVS
+w- w+ h  GWWH  QED
+z  z  h  GZZH  QED
+
+
+#   SSS
+h  h  h  GHHH  QED
+
+#   VVVV
+w- a  w+ a  GWWA  GWWA  QED QED
+w- z  w+ a  GWWZ  GWWA  QED QED
+w- z  w+ z  GWWZ  GWWZ  QED QED
+w- w+ w- w+ GWWZ  GWWA  QED QED
+
+#   VVSS
+w- w+ h  h  GWWHH GWWHH QED QED
+z  z  h  h  GZZHH GZZHH QED QED
+
+
+#   WPVertex
+# FFV (qq'WP) - diagonal CKM
+d u wp- WPVUD QED
+s c wp- WPVCS QED
+b t wp- WPVTB QED
+u d wp+ WPVUD QED
+c s wp+ WPVCS QED
+t b wp+ WPVTB QED
+
+# FFV (qq'WP) - off-diagonal
+d c wp- WPVCD QED
+d t wp- WPVTD QED
+s u wp- WPVUS QED
+s t wp- WPVTS QED
+b u wp- WPVUB QED
+b c wp- WPVCB QED
+c d wp+ WPVCD QED
+t d wp+ WPVTD QED
+u s wp+ WPVUS QED
+t s wp+ WPVTS QED
+u b wp+ WPVUB QED
+c b wp+ WPVCB QED
+
+# FFV (ll'WP) - diagonal CKM
+ve  e-  wp+ WPVEVE QED
+vm  mu- wp+ WPVMVM QED
+vt  ta- wp+ WPVTVT QED
+e-  ve  wp- WPVEVE QED
+mu- vm  wp- WPVMVM QED
+ta- vt  wp- WPVTVT QED
+
+# FFV (ll'WP) - off-diagonal
+e- vm wp- WPVEVM QED
+e- vt wp- WPVEVT QED
+mu- ve wp- WPVMVE QED
+mu- vt wp- WPVMVT QED
+ta- ve wp- WPVTVE QED
+ta- vm wp- WPVTVM QED
+vm e- wp+ WPVEVM QED
+vt e- wp+ WPVEVT QED
+ve mu- wp+ WPVMVE QED
+vt mu- wp+ WPVMVT QED
+ve ta- wp+ WPVTVE QED
+vm ta- wp+ WPVTVM QED

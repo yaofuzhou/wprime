@@ -1,0 +1,198 @@
+*****************************************
+*                                       *
+*  h   h  ooo  w     w ttttttt ooo      *
+*  h   h o   o w     w 	  t   o   o     *
+*  hhhhh o   o w  w  w    t   o   o     *
+*  h   h o   o w  w  w    t   o   o     *
+*  h   h  ooo   ww ww     t    ooo      *
+*                                       *
+*                                       *
+*      use wprime_1.0.1_v4/ model       *
+*             Version 1.0.1             *
+*  Based on MadGraph/MadEvent V4.4.33   *
+*  (Modified for use w/ MadEvent 5+)    *
+*                                       *
+* Zack Sullivan<zack.sullivan@iit.edu>  *
+*            and Yaofu Zhou             *
+*          Physics Department           *
+*    Illinois Institute of Technology   *
+*                                       *
+*            Jan. 19, 2011              *
+*                                       *
+*****************************************
+
+Note: wprime_1.0.1_v4/ is the current directory, but is referred to as
+wprime/ below.
+
+The wprime/ model is an extension of the Standard Model (i.e. smckm/) that
+contains a W-prime boson with arbitrary vector and axial-vector couplings
+to Standard Model fermions (with no right-handed neutrinos).
+
+The most general Lorentz invariant Lagrangian describing the coupling of a
+W-prime to fermions can be written as
+
+\mathcal{L}=
+
+\frac{g}{\sqrt{2}}\bar{f_{i}}\gamma_{\mu}
+(C_{f_{i}f_{j}}^{R}P_{R}+C_{f_{i}f_{j}}^{L}P_{L})W'f_{j}+
+\mathrm{H.c.}=                                                       (1)
+
+\frac{1}{\sqrt{2}}\bar{f_{i}}\gamma_{\mu}
+(g_{R}e^{i\omega}\cos\zeta V_{f_{i}f_{j}}^{R}P_{R}+
+ g_{L}\sin\zeta V_{f_{i}f_{j}}^{L}P_{L})W'f_{j}+
+\mathrm{H.c.}=                                                       (2)
+
+\frac{g}{\sqrt{2}}\bar{f_{i}}\gamma_{\mu}
+(S_{R}e^{i\omega}V_{f_{i}f_{j}}^{R}P_{R}+
+ S_{L}V_{f_{i}f_{j}}^{L}P_{L})W'f_{j}+
+\mathrm{H.c.},                                                       (3)
+
+Form (3) is used in wprime/ model, where the left-right mixing factors
+\cos\zeta and \sin\zeta in form (2) are absorbed into S_{R} and S_{L},
+respectively.
+
+To configure an arbitrary model with a given W-prime boson,
+SMLeftRight.wpmod can be modified to include any possible couplings to
+fermions. If only left- or right-handed W-prime bosons are needed, only
+param_card.dat needs to be modified for the mass and handedness.
+
+1. param_card.dat
+
+1.1. The mass of the W-prime boson is set by "WPMASS".
+
+1.2. There is no need to set the "WPWIDTH", as it will be reevaluated
+according to the W-prime mass and couplings. (Note the LO mass used is
+written out in MadEvent 4, but MadEvent 5 suppresses output.)
+
+1.3.1. If the W-prime boson in the model couples to the fermions like
+the Standard Model left-handed W boson does (same CKM matrix), up to a
+scaling factor for the left- and right-handed couplings, "model" can
+be set to either 0 or 1. If "model" is set to 1, go to Step 1.3.2; if
+"model" set to 0,
+
+1.3.1.1. "glscale" and "grscale" are used to set the scaling factors
+for the left- and right-handed couplings, respectively.
+
+1.3.1.2. There is no need to touch SMLeftRight.wpmod.
+
+1.3.1.3. Run
+
+$ make checkmodel
+$ ./checkmodel
+
+to check whether good values are assigned to good variables.
+
+1.3.2. If "model" is set to 1, wpmodelfile is read in to set the base
+couplings. "glscale" and "grscale" are ALWAYS used to quickly rescale
+left- and right-handed couplings. For example, use them to switch
+on/off left- or right-handed couplings by setting them to either 1e0
+or 0e0. Additional multipliers are available in the .wpmod model file
+(base file is SMLeftRight.wpmod).
+
+2. SMLeftRight.wpmod
+
+2.1. Follow the instructions in SMLeftRight.wpmod if you wish to
+modify it.
+
+2.2. Enable logging in SMLeftRight.wpmod and Run
+
+$ make checkmodel
+$ ./checkmodel
+
+to check if the parameters are set correctly. W-prime couplings,
+generalized CKM matrices, W-prime mass, W-prime width, branching
+ratios of W-prime decay, and R_{t}'s and R_{u}'s for the s-channel
+cross sections are printed to the terminal, which can be redirected to
+files. For complete definitions of R_{t} and R_{u}, see Z. Sullivan,
+Phys. Rev. D 66, 075011 (2002) [hep-ph/0207290].
+
+Note that this log is only printed by running the ./checkmodel
+command, and is not printed while running MadGraph/MadEvent.
+
+2.3. Note that if all R_{u}'s are 0, the model is purely right- or
+left-handed, it scales like the Standard Model, and the ratio between
+the effective coupling constant and the Standard Model coupling
+constant for each s-channel diagram can be extracted. See the
+footnote for info on R_{u} and R_{t}.
+
+3. Generating events with MadGraph/MadEvent 4
+
+3.1. In [run directory]/Cards/proc_card.dat, enter "wprime_1.0.1_v4"
+in Model information.
+
+3.2. Edit the processes as desired. The symbol of W-prime boson is wp-
+for the particle and wp+ for the antiparticle. The W-prime boson in
+wprime/ model directory couples only to the Standard Model fermions.
+You may refer to wprime/particles.dat or wprime/internations.dat for
+more details. Example processes involving W-prime boson are
+
+p p > wp+ > t b~
+p p > wp- > e- ev~
+
+Interference can occur between a left-handed W-prime boson and the
+Standard Model W boson in
+
+p p > t b~
+
+as the intermediate boson is not specified.
+
+3.3. In [run directory]/ Run
+
+$ ./bin/newprocess
+
+This replace the default model of [run directory]/ with the wprime/
+model. Further changes to param_card.dat and SMLeftRight.wpmod can be
+made in [run directory]/Cards/param_card.dat, and
+[run directory]/Source/MODEL/SMLeftRight.wpmod
+
+3.4. Configure [run directory]/Cards/run_card.dat, go to [run directory]/
+and run
+
+$ ./bin/generate_events
+
+to generate events.
+
+3.5. The default compiler in the makefile in wprime/ is f77 as in other
+codes in MadGraph/MadEvent V4.4.33. f77 can be changed to gfortran
+when wprime/ is running independently, minor effects may occur in the
+log.
+
+4. Generating events with MadEvent 5 (or mg5_aMC)
+
+4.1. MadEvent 5 (and the newer mg5_aMC) have adopted a python-based
+approach to reading files. The only change required to run in
+MadEvent 5 is to change the compiler in the makefile from f77 to
+gfortran.
+
+4.2. To load the model into ME5 use:
+import model_v4 wprime_1.0.1_v4
+
+4.3. Remember to change the mass in param_card.dat to the mass you
+desire, and set glscale or grscale. Otherwise, all other features are
+the same between MadEvent 4 and 5.
+
+==================================================================
+Footnote
+
+R_{t}=
+(|V_{i}|^{2}+|A_{i}|^{2})(|V_{f}|^{2}+|A_{f}|^{2})+
+4\mathrm{Re}(V_{i}A_{i}^{*})\mathrm{Re}(V_{f}A_{f}^{*})
+
+R_{u}=
+(|V_{i}|^{2}+|A_{i}|^{2})(|V_{f}|^{2}+|A_{f}|^{2})-
+4\mathrm{Re}(V_{i}A_{i}^{*})\mathrm{Re}(V_{f}A_{f}^{*})
+
+where
+
+|V|^{2}+|A|^{2}=
+(|S_{R}V_{f_{i}f_{j}}^{R}|^{2}+|S_{L}V_{f_{i}f_{j}}^{L}|^{2})/4
+
+2\mathrm{Re}(VA^{*})=
+(|S_{R}V_{f_{i}f_{j}}^{R}|^{2}-|S_{L}V_{f_{i}f_{j}}^{L}|^{2})/4
+
+If All R_{u}'s are 0, the model is purely right- or left-handed, and
+scales like the Standard Model, otherwise there are
+non-Standard-Model-like kinematics. This is correctly accounted for
+by MadEvent, but might require modifying SMLeftRight.wpmod if the
+couplings are not simple scalings of the Standard Model-like ones.
+
